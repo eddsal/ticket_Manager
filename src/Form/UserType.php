@@ -23,7 +23,7 @@ class UserType extends AbstractType
                 'second_options' => array('label' => 'Repeat Password'),
             ))
         ;
-    }
+    }   
 
     public function configureOptions(OptionsResolver $resolver)
     {

@@ -35,4 +35,4 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/dashboard, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/ticket, roles: IS_AUTHENTICATED_FULLY }
