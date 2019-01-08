@@ -6,7 +6,11 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+        fssc
+            {% embed "main/index.html.twig"%}
+            {% endembed %}        
+        {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

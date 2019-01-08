@@ -25,8 +25,13 @@
                 <td>{{ ticket.message }}</td>
                 <td>{{ ticket.date ? ticket.date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
+                     {% if is_granted('ROLE_USER') == true %}
                     <a href="{{ path('ticket_show', {'id': ticket.id}) }}">show</a>
+                        {% else %}
                     <a href="{{ path('ticket_edit', {'id': ticket.id}) }}">edit</a>
+                             
+        {% endif %}
+
                 </td>
             </tr>
         {% else %}
