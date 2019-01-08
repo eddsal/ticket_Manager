@@ -27,10 +27,15 @@ class User implements UserInterface, \Serializable
      */
     private $password;
 
+    
+    private $plainPassword;
+
     /**
      * @ORM\Column(type="string", length=255,unique=true)
      */
     private $email;
+
+
 
     public function getId(): ?int
     {
@@ -47,6 +52,15 @@ class User implements UserInterface, \Serializable
         $this->username = $username;
 
         return $this;
+    }
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     public function getPassword(): ?string
