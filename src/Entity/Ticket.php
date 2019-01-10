@@ -36,6 +36,11 @@ class Ticket
      */
     private $date;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Comments", inversedBy="tickets")
+     */
+    private $comment;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +90,18 @@ class Ticket
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getComment(): ?Comments
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?Comments $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }
