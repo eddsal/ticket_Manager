@@ -21,6 +21,7 @@ class UserFixture extends Fixture
     {
         $user = new User();
         $user->setUsername('admin');
+        $user->getRoles(['ROLE_ADMIN']);
         $user->setPassword(
                 $this->encoder->encodePassword($user,'0000')
         );

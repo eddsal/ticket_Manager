@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for ticket in tickets %}
+        {% for ticket in tickets %} 
             <tr>
                 <td>{{ ticket.id }}</td>
                 <td>{{ ticket.Author }}</td>
@@ -43,4 +43,5 @@
     </table>
 
     <a href="{{ path('ticket_new') }}">Create new</a>
+      <p><a href="{{'/logout' }}">Logout</a></p>
 {% endblock %}

@@ -16,14 +16,65 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class TicketController extends AbstractController
 {
+  
+ 
     /**
      * @Route("/", name="ticket_index", methods={"GET"})
      */
-    public function index(TicketRepository $ticketRepository): Response
+    public function index(TicketRepository $ticketRepository)
+    /*    public function index()*/
     {
-        return $this->render('ticket/index.html.twig', ['tickets' => $ticketRepository->findAll()]);
-    }
+        /*        $repo = $this->getDoctrine()->getRepository(Article::class);
+        $repuser = $this->getDoctrine()->getRepository(User::class);*/
+       if ($this->isGranted('ROLE_ADMIN')){
+           $tickets = $ticketRepository->findAll();
+           
+           //    $user = $repuser->findAll();
+           //    dump($user);
+           return $this->render('ticket/index.html.twig', [
+               
+               'tickets' => $tickets,
+               //'user'=>$user,
+               ]);
+            }
+            else{
+                $user = $this -> getUser();
+                $sess =  $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+                
+                //TODO
+                //pas tout a fais compris
+                //        if(!$sess){
+                    //            $articles = $user->getArticles();
+                    //        }else{
+                        //            return $this->render('main/index.html.twig');
+                        //        }
+                        
+                        //        return $this->render('main/index.html.twig', [
+                            //            'controller_name' => 'MainController',
+                            //            'articles' => $tickets,
+                            //            'user'=>$user,
+                            
+                            //        ]);
+                        }
+                    }
+                        
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     /**
      * @Route("/new", name="ticket_new", methods={"GET","POST"})
      */
@@ -94,5 +145,36 @@ class TicketController extends AbstractController
         }
 
         return $this->redirectToRoute('ticket_index');
+    }
+
+    
+     /**
+     * @Route("/{id}", name="ticket_comment", methods={"update"})
+     */
+    public function comment(Request $request,TokenStorageInterface $tokenStorage ): Response
+    {
+        $comment = new comments();
+        $form = $this->createForm(TicketType::class, $comment);
+        // $form->handleRequest($request);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $entityManager = $this->getDoctrine()->getManager();
+        //     $user =$tokenStorage->getToken()->getUser();
+        //     $username = $user->getUsername();
+        //     $ticket->setAuthor($username);
+
+        //     $ticket ->setDate( new \DateTime('now'));
+
+
+        //     $entityManager->persist($ticket);
+        //     $entityManager->flush();
+
+        //     return $this->redirectToRoute('ticket_index');
+        // }
+
+        return $this->render('ticket/new.html.twig', [
+            'ticket' => $ticket,
+            'form' => $form->createView(),
+        ]);
     }
 }
